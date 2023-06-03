@@ -10,14 +10,14 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-// app.use(cors(
-//     {
-//         origin: ["http://localhost:3000"],
-//         methods: ["POST", "GET"],
-//         credentials: true 
-//     }
-// ));
-app.use(cors());
+app.use(cors(
+    {
+        origin: ["http://localhost:3000"],
+        methods: ["POST", "GET"],
+        credentials: true 
+    }
+));
+// app.use(cors());
 const db= mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -46,6 +46,15 @@ const verifyUser = (req,res,next) =>{
 app.get('/',verifyUser, (req, res) => {
     return res.json({Status: "Success", name:req.name})
 })
+// import http from 'http';
+// const server = http.createServer()
+// server.on("request", (request, response) => {
+//     // handle request based on method then URL
+//     response.statusCode = 200;
+//     response.write("Hello World")
+//     response.end()
+//     console.log("Hello");
+//   })
 
 app.post('/signup',(req,res)=>{
     const sql = "INSERT INTO users (`name`,`email`,`password`) VALUES(?)";
