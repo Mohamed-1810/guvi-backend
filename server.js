@@ -17,7 +17,7 @@ app.use(cookieParser());
 //         credentials: true 
 //     }
 // ));
-app.use(cors())
+app.use(cors());
 const db= mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -82,6 +82,7 @@ app.post('/login',(req,res)=>{
     })
 })
 // console.log("hello");
-app.listen(8081, ()=>{
+const PORT = process.env.PORT || 8081
+app.listen(PORT, ()=>{
     console.log("listening");
 })
